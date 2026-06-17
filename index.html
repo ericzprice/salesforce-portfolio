@@ -468,6 +468,28 @@
   @media (max-width: 560px) {
     .skills-layout { grid-template-columns: 1fr; }
   }
+
+ .video-section {
+  margin-bottom: 40px;
+}
+
+.video-container {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  padding-top: 56.25%;
+  border-radius: 14px;
+  box-shadow: var(--card-shadow);
+}
+
+.video-container iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
 </style>
 </head>
 <body>
@@ -545,9 +567,12 @@
     including Screen Flows, dashboards, risk scoring, and Lightning App Builder.
   </p>
 
+  <div class="video-section">
+  <h3>🎥 Live Demo</h3>
+
   <div class="video-container">
     <iframe
-      src="https://www.loom.com/share/9a3f659f72f547a695256eea72c88411"
+      src="src="https://www.loom.com/embed/9a3f659f72f547a695256eea72c88411""
       frameborder="0"
       allowfullscreen>
     </iframe>
