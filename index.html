@@ -668,7 +668,307 @@
     </div>
   </div>
 </section>
+<!-- ═══════════════════════════════════════════════════════
+     PASTE THIS BLOCK into index.html
+     Recommended placement: right after the screenshots
+     section closing </section> tag, before the first
+     <div class="divider"></div>
+     ═══════════════════════════════════════════════════════ -->
 
+<!-- inline styles scoped to this section only -->
+<style>
+  .apex-section {
+    background: var(--slate);
+    padding: 64px 0;
+  }
+
+  .apex-section .section-label {
+    background: rgba(0,161,224,0.15);
+    border-color: rgba(0,161,224,0.35);
+    color: var(--cyan-light);
+  }
+
+  .apex-section h2 { color: var(--white); }
+
+  .apex-section .intro-text {
+    color: rgba(255,255,255,0.65);
+    font-size: 15px;
+    max-width: 680px;
+    line-height: 1.7;
+    margin-bottom: 40px;
+  }
+
+  /* ── two-column layout ── */
+  .apex-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 28px;
+    margin-bottom: 36px;
+  }
+
+  /* ── screenshots ── */
+  .apex-screenshot-card {
+    border-radius: var(--radius);
+    overflow: hidden;
+    border: 1px solid rgba(255,255,255,0.10);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.35);
+    transition: transform 0.25s, box-shadow 0.25s;
+    background: #0d1b2a;
+  }
+
+  .apex-screenshot-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 16px 48px rgba(0,0,0,0.50);
+  }
+
+  .apex-screenshot-card .img-wrap {
+    position: relative;
+    overflow: hidden;
+    aspect-ratio: 16 / 10;
+  }
+
+  .apex-screenshot-card .img-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top;
+    display: block;
+    transition: transform 0.4s ease;
+  }
+
+  .apex-screenshot-card:hover .img-wrap img { transform: scale(1.03); }
+
+  .apex-screenshot-card .img-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(3,45,96,0.60) 0%, transparent 55%);
+    opacity: 0;
+    transition: opacity 0.3s;
+    display: flex;
+    align-items: flex-end;
+    padding: 14px;
+  }
+
+  .apex-screenshot-card:hover .img-overlay { opacity: 1; }
+
+  .apex-screenshot-card .img-overlay a {
+    color: var(--white);
+    font-size: 12px;
+    font-weight: 600;
+    text-decoration: none;
+    background: rgba(0,161,224,0.90);
+    padding: 6px 14px;
+    border-radius: var(--radius-sm);
+  }
+
+  .apex-screenshot-card .card-label {
+    padding: 14px 18px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .apex-screenshot-card .card-label-icon {
+    width: 28px; height: 28px;
+    border-radius: 6px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 14px;
+    flex-shrink: 0;
+  }
+
+  .apex-screenshot-card .card-label-text {
+    font-size: 13px;
+    font-weight: 600;
+    color: rgba(255,255,255,0.90);
+  }
+
+  .apex-screenshot-card .card-label-sub {
+    font-size: 11.5px;
+    color: rgba(255,255,255,0.45);
+    margin-top: 1px;
+  }
+
+  /* ── meta cards row ── */
+  .apex-meta-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+    margin-bottom: 28px;
+  }
+
+  .apex-meta-card {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.09);
+    border-radius: var(--radius-sm);
+    padding: 18px 20px;
+  }
+
+  .apex-meta-card .meta-label {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.10em;
+    text-transform: uppercase;
+    color: var(--cyan);
+    margin-bottom: 10px;
+  }
+
+  .apex-meta-card ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  .apex-meta-card li {
+    font-size: 12.5px;
+    color: rgba(255,255,255,0.75);
+    padding-left: 14px;
+    position: relative;
+    line-height: 1.4;
+  }
+
+  .apex-meta-card li::before {
+    content: '▸';
+    position: absolute;
+    left: 0;
+    color: var(--cyan);
+    font-size: 9px;
+    top: 3px;
+  }
+
+  /* ── result banner ── */
+  .apex-result {
+    background: rgba(45,187,111,0.10);
+    border: 1px solid rgba(45,187,111,0.25);
+    border-radius: var(--radius-sm);
+    padding: 16px 20px;
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+  }
+
+  .apex-result-icon {
+    font-size: 20px;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  .apex-result-text {
+    font-size: 13.5px;
+    color: rgba(255,255,255,0.80);
+    line-height: 1.6;
+  }
+
+  .apex-result-text strong {
+    color: #2DBB6F;
+    font-weight: 600;
+  }
+
+  @media (max-width: 720px) {
+    .apex-layout { grid-template-columns: 1fr; }
+  }
+</style>
+
+<div class="divider"></div>
+
+<section class="apex-section">
+  <div class="container">
+
+    <div class="section-header">
+      <span class="section-label">Apex Development</span>
+      <h2>Duplicate Prevention Framework</h2>
+    </div>
+
+    <p class="apex-section intro-text">
+      To improve data quality and platform governance, I implemented a custom Apex validation
+      framework that prevents duplicate Technical Debt Item records from being created. The solution
+      uses a custom Apex class and before-insert trigger to evaluate incoming records against existing
+      open items — stopping duplicates at the transaction level with a clear user-facing error message.
+    </p>
+
+    <!-- Screenshots -->
+    <div class="apex-layout">
+
+      <div class="apex-screenshot-card">
+        <div class="img-wrap">
+          <img src="apex-vscode.png" alt="TechDebtDuplicateChecker Apex class in VS Code" loading="lazy">
+          <div class="img-overlay">
+            <a href="apex-vscode.png" target="_blank">↗ Full size</a>
+          </div>
+        </div>
+        <div class="card-label">
+          <div class="card-label-icon" style="background:rgba(0,161,224,0.15);">💻</div>
+          <div>
+            <div class="card-label-text">TechDebtDuplicateChecker.cls</div>
+            <div class="card-label-sub">Apex class · deployed via Salesforce CLI from VS Code</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="apex-screenshot-card">
+        <div class="img-wrap">
+          <img src="apex-duplicate-error.png" alt="Duplicate error message shown to user in Salesforce" loading="lazy">
+          <div class="img-overlay">
+            <a href="apex-duplicate-error.png" target="_blank">↗ Full size</a>
+          </div>
+        </div>
+        <div class="card-label">
+          <div class="card-label-icon" style="background:rgba(224,52,43,0.15);">🚫</div>
+          <div>
+            <div class="card-label-text">Live Duplicate Error</div>
+            <div class="card-label-sub">User-friendly validation message on record save</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Business Value + Technical Components -->
+    <div class="apex-meta-row">
+      <div class="apex-meta-card">
+        <div class="meta-label">Business Value</div>
+        <ul>
+          <li>Prevents duplicate tracking efforts across teams</li>
+          <li>Improves reporting accuracy and dashboard metrics</li>
+          <li>Reduces admin overhead from duplicate records</li>
+          <li>Demonstrates scalable platform governance</li>
+        </ul>
+      </div>
+      <div class="apex-meta-card">
+        <div class="meta-label">Technical Components</div>
+        <ul>
+          <li>Apex Class — TechDebtDuplicateChecker</li>
+          <li>Apex Trigger — TechDebtTrigger (before insert)</li>
+          <li>Bulk-safe duplicate detection logic</li>
+          <li>Automated Apex test coverage</li>
+          <li>Deployed via Salesforce CLI + VS Code</li>
+        </ul>
+      </div>
+      <div class="apex-meta-card">
+        <div class="meta-label">How It Works</div>
+        <ul>
+          <li>Collects Debt Types from incoming records</li>
+          <li>Queries existing open items matching those types</li>
+          <li>Builds a Component Name + Debt Type key set</li>
+          <li>Calls addError() on any matching new record</li>
+          <li>Stops the transaction before insert</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Result banner -->
+    <div class="apex-result">
+      <div class="apex-result-icon">✅</div>
+      <div class="apex-result-text">
+        <strong>Result:</strong> Users receive immediate feedback when attempting to create duplicate
+        technical debt records, ensuring a single source of truth for platform improvement initiatives
+        — without requiring any manual review process.
+      </div>
+    </div>
+
+  </div>
+</section>
+<!-- ═══ END APEX SECTION ═══ -->
 <div class="divider"></div>
 
 <!-- ═══ SKILLS ═══ -->
