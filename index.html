@@ -971,6 +971,440 @@
 <!-- ═══ END APEX SECTION ═══ -->
 <div class="divider"></div>
 
+<!-- ═══ NEXGEN LIVING ═══ -->
+<style>
+  .nexgen-section { background: var(--navy); padding: 72px 0; }
+
+  .nexgen-section h2 { color: var(--white); }
+
+  .nexgen-intro {
+    color: rgba(255,255,255,0.65);
+    font-size: 15px;
+    max-width: 700px;
+    line-height: 1.75;
+    margin-bottom: 44px;
+  }
+
+  /* ── cloud badges ── */
+  .cloud-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 44px;
+  }
+
+  .cloud-badge {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.14);
+    color: rgba(255,255,255,0.85);
+    font-size: 12px;
+    font-weight: 600;
+    padding: 6px 14px;
+    border-radius: 999px;
+    letter-spacing: 0.02em;
+  }
+
+  .cloud-badge .cb-dot {
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  /* ── two-col layout ── */
+  .nexgen-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 28px;
+    margin-bottom: 32px;
+  }
+
+  /* ── PDF preview card ── */
+  .nexgen-pdf-card {
+    border-radius: var(--radius);
+    overflow: hidden;
+    border: 1px solid rgba(255,255,255,0.12);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.40);
+    background: #0d1b2a;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.25s, box-shadow 0.25s;
+  }
+
+  .nexgen-pdf-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 16px 48px rgba(0,0,0,0.55);
+  }
+
+  .pdf-preview-wrap {
+    position: relative;
+    flex: 1;
+    overflow: hidden;
+    min-height: 260px;
+    background: linear-gradient(135deg, #0d2137 0%, #091929 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* decorative page stack visual */
+  .pdf-mock {
+    position: relative;
+    width: 160px;
+    height: 200px;
+  }
+
+  .pdf-mock-page {
+    position: absolute;
+    border-radius: 6px;
+    border: 1px solid rgba(255,255,255,0.10);
+  }
+
+  .pdf-mock-page:nth-child(1) {
+    width: 140px; height: 180px;
+    background: #132940;
+    top: 20px; left: 20px;
+    transform: rotate(4deg);
+  }
+
+  .pdf-mock-page:nth-child(2) {
+    width: 140px; height: 180px;
+    background: #1a3550;
+    top: 10px; left: 10px;
+    transform: rotate(2deg);
+  }
+
+  .pdf-mock-page:nth-child(3) {
+    width: 140px; height: 180px;
+    background: #1f3d5c;
+    top: 0; left: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 18px 14px;
+    gap: 8px;
+  }
+
+  .pdf-mock-line {
+    height: 6px;
+    border-radius: 3px;
+    background: rgba(0,161,224,0.35);
+  }
+
+  .pdf-mock-line.accent { background: rgba(0,161,224,0.70); width: 60%; }
+  .pdf-mock-line.w90 { width: 90%; }
+  .pdf-mock-line.w75 { width: 75%; }
+  .pdf-mock-line.w85 { width: 85%; }
+  .pdf-mock-line.w50 { width: 50%; }
+
+  .pdf-title-overlay {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    padding: 20px;
+    background: linear-gradient(to top, rgba(3,45,96,0.85) 0%, transparent 100%);
+  }
+
+  .pdf-title-overlay span {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--cyan-light);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+
+  .pdf-card-footer {
+    padding: 16px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-top: 1px solid rgba(255,255,255,0.08);
+  }
+
+  .pdf-card-footer-label {
+    font-size: 13px;
+    font-weight: 600;
+    color: rgba(255,255,255,0.80);
+  }
+
+  .pdf-card-footer-sub {
+    font-size: 11px;
+    color: rgba(255,255,255,0.40);
+    margin-top: 2px;
+  }
+
+  .pdf-dl-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    background: var(--cyan);
+    color: var(--navy);
+    font-size: 12px;
+    font-weight: 700;
+    padding: 8px 16px;
+    border-radius: var(--radius-sm);
+    text-decoration: none;
+    transition: background 0.2s, transform 0.2s;
+    white-space: nowrap;
+  }
+
+  .pdf-dl-btn:hover { background: var(--cyan-light); transform: translateY(-1px); }
+
+  /* ── patterns grid ── */
+  .patterns-col {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .pattern-card {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.09);
+    border-radius: var(--radius-sm);
+    padding: 16px 18px;
+    transition: background 0.2s;
+  }
+
+  .pattern-card:hover { background: rgba(255,255,255,0.08); }
+
+  .pattern-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 6px;
+  }
+
+  .pattern-num {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.10em;
+    color: var(--cyan);
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+
+  .pattern-cloud-tag {
+    font-size: 10px;
+    font-weight: 600;
+    color: rgba(255,255,255,0.40);
+    background: rgba(255,255,255,0.06);
+    padding: 2px 8px;
+    border-radius: 999px;
+    white-space: nowrap;
+  }
+
+  .pattern-card h4 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 13.5px;
+    font-weight: 600;
+    color: rgba(255,255,255,0.90);
+    margin-bottom: 4px;
+  }
+
+  .pattern-card p {
+    font-size: 12px;
+    color: rgba(255,255,255,0.50);
+    line-height: 1.55;
+  }
+
+  /* ── data model strip ── */
+  .data-model-strip {
+    background: rgba(0,0,0,0.20);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: var(--radius);
+    padding: 24px 28px;
+    margin-bottom: 28px;
+  }
+
+  .data-model-strip h4 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--cyan);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 14px;
+  }
+
+  .object-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .object-pill {
+    font-family: 'Courier New', monospace;
+    font-size: 11.5px;
+    color: rgba(255,255,255,0.75);
+    background: rgba(0,161,224,0.10);
+    border: 1px solid rgba(0,161,224,0.20);
+    padding: 4px 11px;
+    border-radius: var(--radius-sm);
+  }
+
+  /* ── interview quote ── */
+  .interview-quote {
+    background: rgba(0,161,224,0.07);
+    border-left: 3px solid var(--cyan);
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    padding: 20px 24px;
+  }
+
+  .interview-quote-label {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--cyan);
+    margin-bottom: 10px;
+  }
+
+  .interview-quote p {
+    font-size: 13.5px;
+    color: rgba(255,255,255,0.70);
+    line-height: 1.70;
+    font-style: italic;
+  }
+
+  @media (max-width: 760px) {
+    .nexgen-layout { grid-template-columns: 1fr; }
+  }
+</style>
+
+<section class="nexgen-section" id="nexgen">
+  <div class="container">
+
+    <div class="section-header">
+      <span class="section-label" style="background:rgba(0,161,224,0.15);border-color:rgba(0,161,224,0.35);color:var(--cyan-light);">Architecture Design</span>
+      <h2>NexGen Living — Multi-Cloud Salesforce Architecture</h2>
+    </div>
+
+    <p class="nexgen-intro">
+      NexGen Living is a PropTech startup concept I designed a complete Salesforce architecture for from scratch — 
+      a two-sided intergenerational housing marketplace that pairs senior homeowners with a spare room with young 
+      professionals or students who need affordable housing. The architecture spans seven Salesforce clouds, ten 
+      custom objects, a declarative matchmaking engine, and cross-cloud revenue enforcement — all built and 
+      documented in a single Developer Edition org with no code beyond one Apex duplicate-prevention class.
+    </p>
+
+    <!-- Cloud badges -->
+    <div class="cloud-row">
+      <span class="cloud-badge"><span class="cb-dot" style="background:#00A1E0"></span>Sales Cloud</span>
+      <span class="cloud-badge"><span class="cb-dot" style="background:#E0342B"></span>Service Cloud</span>
+      <span class="cloud-badge"><span class="cb-dot" style="background:#2DBB6F"></span>Experience Cloud</span>
+      <span class="cloud-badge"><span class="cb-dot" style="background:#F59A23"></span>Revenue Cloud</span>
+      <span class="cloud-badge"><span class="cb-dot" style="background:#9B59B6"></span>Marketing Cloud</span>
+      <span class="cloud-badge"><span class="cb-dot" style="background:#41C5E8"></span>Field Service</span>
+      <span class="cloud-badge"><span class="cb-dot" style="background:#FFD700"></span>Agentforce</span>
+    </div>
+
+    <div class="nexgen-layout">
+
+      <!-- PDF download card -->
+      <div class="nexgen-pdf-card">
+        <div class="pdf-preview-wrap">
+          <div class="pdf-mock">
+            <div class="pdf-mock-page"></div>
+            <div class="pdf-mock-page"></div>
+            <div class="pdf-mock-page">
+              <div class="pdf-mock-line accent"></div>
+              <div class="pdf-mock-line w90"></div>
+              <div class="pdf-mock-line w75"></div>
+              <div class="pdf-mock-line w85"></div>
+              <div class="pdf-mock-line w50"></div>
+              <div class="pdf-mock-line w90"></div>
+              <div class="pdf-mock-line w75"></div>
+              <div class="pdf-mock-line w85"></div>
+            </div>
+          </div>
+          <div class="pdf-title-overlay">
+            <span>Complete Reference · 24 pages</span>
+          </div>
+        </div>
+        <div class="pdf-card-footer">
+          <div>
+            <div class="pdf-card-footer-label">NexGen Living — Complete Reference</div>
+            <div class="pdf-card-footer-sub">Flows · Data Model · Architecture · Dev Setup · Interview Prep</div>
+          </div>
+          <a href="NexGen_Living_Complete_Reference.pdf" download class="pdf-dl-btn">↓ PDF</a>
+        </div>
+      </div>
+
+      <!-- Architecture patterns -->
+      <div class="patterns-col">
+        <div class="pattern-card">
+          <div class="pattern-header">
+            <span class="pattern-num">Pattern 01</span>
+            <span class="pattern-cloud-tag">Sales Cloud</span>
+          </div>
+          <h4>Scheduled Flow as Matchmaking Engine</h4>
+          <p>Queries both renter and senior pools nightly, scores compatibility across 8 criteria using formula fields, auto-creates ranked Match_Proposal__c records — no Apex.</p>
+        </div>
+        <div class="pattern-card">
+          <div class="pattern-header">
+            <span class="pattern-num">Pattern 02</span>
+            <span class="pattern-cloud-tag">Service Cloud</span>
+          </div>
+          <h4>Platform Event as IoT Bridge</h4>
+          <p>Smart home sensors publish Platform Events. A Platform Event-Triggered Flow converts the payload into a Priority Critical Case in real time — rare on resumes.</p>
+        </div>
+        <div class="pattern-card">
+          <div class="pattern-header">
+            <span class="pattern-num">Pattern 03</span>
+            <span class="pattern-cloud-tag">Revenue Cloud</span>
+          </div>
+          <h4>Contractual SLA → Automatic Invoice Credit</h4>
+          <p>An SLA breach flips a checkbox. A Record-Triggered Flow calculates the penalty, creates a Credit_Memo__c, and injects a negative line item into the next open invoice. Cross-cloud, declarative.</p>
+        </div>
+        <div class="pattern-card">
+          <div class="pattern-header">
+            <span class="pattern-num">Pattern 04</span>
+            <span class="pattern-cloud-tag">Experience Cloud</span>
+          </div>
+          <h4>Three Portals, One Org, Zero Code</h4>
+          <p>Haven (seniors), Base (renters), and Partner Hub (universities/brokers) — all from one org using profiles, permission sets, and sharing rules. No code deployment differences.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Data model strip -->
+    <div class="data-model-strip">
+      <h4>Custom Objects — Data Model Spine</h4>
+      <div class="object-pills">
+        <span class="object-pill">Match__c</span>
+        <span class="object-pill">Housing_Unit__c</span>
+        <span class="object-pill">Companion_Hours__c</span>
+        <span class="object-pill">Monthly_Hours_Report__c</span>
+        <span class="object-pill">Invoice__c</span>
+        <span class="object-pill">Credit_Memo__c</span>
+        <span class="object-pill">Match_Proposal__c</span>
+        <span class="object-pill">Wellbeing_Check__c</span>
+        <span class="object-pill">Commission__c</span>
+        <span class="object-pill">Contact (extended)</span>
+      </div>
+    </div>
+
+    <!-- Interview opening story quote -->
+    <div class="interview-quote">
+      <div class="interview-quote-label">Architecture Summary</div>
+      <p>"NexGen Living is a two-sided marketplace, which means I had to build two completely different 
+      acquisition funnels, two distinct Experience Cloud portals, two separate Marketing Cloud journeys — 
+      and then have them converge at a matching engine. The matching engine is a Scheduled Flow that queries 
+      both pools, scores compatibility across eight criteria, and auto-creates ranked match proposals. No Apex. 
+      The piece I'm most proud of is the contractual enforcement chain: when a Service Cloud SLA is breached, 
+      a Record-Triggered Flow automatically calculates the financial penalty, creates a Credit Memo, and injects 
+      a negative line item into the next invoice through Revenue Cloud. The renter's contract enforces itself — 
+      that kind of cross-cloud data flow, done entirely declaratively, is what separates a Salesforce architect 
+      from someone who just builds flows."</p>
+    </div>
+
+  </div>
+</section>
+
+<div class="divider"></div>
+
 <!-- ═══ SKILLS ═══ -->
 <section class="section" style="padding-top:48px;">
   <div class="container">
