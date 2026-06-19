@@ -1,0 +1,1516 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Eric Price | Salesforce Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --navy: #032D60;
+    --navy-mid: #0A3D7A;
+    --cyan: #00A1E0;
+    --cyan-light: #41C5E8;
+    --white: #FFFFFF;
+    --off-white: #F0F5FB;
+    --slate: #1B2A3B;
+    --text: #2C3E50;
+    --muted: #637080;
+    --border: #D8E4F0;
+    --card-shadow: 0 4px 24px rgba(3,45,96,0.10);
+    --card-shadow-hover: 0 12px 40px rgba(3,45,96,0.18);
+    --radius: 14px;
+    --radius-sm: 8px;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--off-white);
+    color: var(--text);
+    line-height: 1.6;
+  }
+
+  /* ─── HERO ─── */
+  .hero {
+    background: var(--navy);
+    position: relative;
+    overflow: hidden;
+    padding: 72px 24px 80px;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 60% 80% at 80% 50%, rgba(0,161,224,0.18) 0%, transparent 70%),
+      radial-gradient(ellipse 40% 60% at 10% 80%, rgba(0,161,224,0.10) 0%, transparent 60%);
+  }
+
+  .hero::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(0,161,224,0.06) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,161,224,0.06) 1px, transparent 1px);
+    background-size: 48px 48px;
+    mask-image: radial-gradient(ellipse at center, black 30%, transparent 80%);
+  }
+
+  .hero-inner {
+    position: relative;
+    z-index: 2;
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 56px;
+    align-items: center;
+  }
+
+  .hero-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(0,161,224,0.15);
+    border: 1px solid rgba(0,161,224,0.30);
+    color: var(--cyan-light);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 6px 14px;
+    border-radius: 999px;
+    margin-bottom: 20px;
+  }
+
+  .hero-eyebrow::before {
+    content: '';
+    width: 7px; height: 7px;
+    background: var(--cyan);
+    border-radius: 50%;
+    animation: pulse 2s ease-in-out infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(0.8); }
+  }
+
+  .hero h1 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: clamp(38px, 5vw, 64px);
+    font-weight: 700;
+    color: var(--white);
+    line-height: 1.05;
+    margin-bottom: 12px;
+    letter-spacing: -0.02em;
+  }
+
+  .hero h1 span { color: var(--cyan); }
+
+  .hero-sub {
+    font-size: 17px;
+    color: rgba(255,255,255,0.65);
+    margin-bottom: 28px;
+    max-width: 480px;
+    font-weight: 400;
+  }
+
+  .cert-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 32px;
+  }
+
+  .pill {
+    background: rgba(255,255,255,0.10);
+    border: 1px solid rgba(255,255,255,0.20);
+    color: rgba(255,255,255,0.90);
+    font-size: 12px;
+    font-weight: 500;
+    padding: 5px 13px;
+    border-radius: 999px;
+  }
+
+  .hero-ctas {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 11px 22px;
+    border-radius: var(--radius-sm);
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.2s;
+    cursor: pointer;
+    border: none;
+  }
+
+  .btn-primary { background: var(--cyan); color: var(--navy); }
+  .btn-primary:hover { background: var(--cyan-light); transform: translateY(-1px); }
+
+  .btn-outline {
+    background: transparent;
+    border: 1px solid rgba(255,255,255,0.30);
+    color: var(--white);
+  }
+  .btn-outline:hover { background: rgba(255,255,255,0.08); transform: translateY(-1px); }
+
+  /* ─── HEADSHOT ─── */
+  .headshot-wrap {
+    position: relative;
+    flex-shrink: 0;
+  }
+
+  .headshot-ring {
+    width: 220px;
+    height: 220px;
+    border-radius: 50%;
+    padding: 4px;
+    background: linear-gradient(135deg, var(--cyan) 0%, rgba(0,161,224,0.2) 100%);
+    box-shadow: 0 0 0 1px rgba(0,161,224,0.3), 0 24px 48px rgba(0,0,0,0.4);
+  }
+
+  .headshot-ring img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: center top;
+    display: block;
+  }
+
+  .headshot-badge {
+    position: absolute;
+    bottom: 8px;
+    right: 0;
+    background: var(--cyan);
+    color: var(--navy);
+    font-size: 11px;
+    font-weight: 700;
+    padding: 5px 12px;
+    border-radius: 999px;
+    white-space: nowrap;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  }
+
+  /* ─── LAYOUT ─── */
+  .container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  .section { padding: 64px 0; }
+
+  .section-header {
+    display: flex;
+    align-items: baseline;
+    gap: 16px;
+    margin-bottom: 36px;
+  }
+
+  .section-label {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--cyan);
+    background: rgba(0,161,224,0.08);
+    border: 1px solid rgba(0,161,224,0.20);
+    padding: 4px 12px;
+    border-radius: 999px;
+    white-space: nowrap;
+  }
+
+  h2 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: clamp(24px, 3vw, 32px);
+    font-weight: 700;
+    color: var(--navy);
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+  }
+
+  /* ─── VALUE STRIP ─── */
+  .value-strip { background: var(--navy); padding: 36px 0; }
+
+  .value-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1px;
+    background: rgba(255,255,255,0.10);
+  }
+
+  .value-card { background: var(--navy); padding: 28px 32px; }
+  .value-icon { font-size: 24px; margin-bottom: 10px; }
+
+  .value-card h3 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--white);
+    margin-bottom: 6px;
+  }
+
+  .value-card p { font-size: 13px; color: rgba(255,255,255,0.55); line-height: 1.5; }
+
+  /* ─── SCREENSHOTS GRID ─── */
+  .screenshots-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 24px;
+  }
+
+  .screenshot-card {
+    background: var(--white);
+    border-radius: var(--radius);
+    overflow: hidden;
+    box-shadow: var(--card-shadow);
+    transition: box-shadow 0.25s, transform 0.25s;
+    border: 1px solid var(--border);
+  }
+
+  .screenshot-card:hover {
+    box-shadow: var(--card-shadow-hover);
+    transform: translateY(-3px);
+  }
+
+  .screenshot-img-wrap {
+    position: relative;
+    overflow: hidden;
+    aspect-ratio: 16 / 10;
+    background: var(--off-white);
+  }
+
+  .screenshot-img-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top;
+    transition: transform 0.4s ease;
+    display: block;
+  }
+
+  .screenshot-card:hover .screenshot-img-wrap img { transform: scale(1.03); }
+
+  .screenshot-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(3,45,96,0.55) 0%, transparent 50%);
+    opacity: 0;
+    transition: opacity 0.3s;
+    display: flex;
+    align-items: flex-end;
+    padding: 16px;
+  }
+
+  .screenshot-card:hover .screenshot-overlay { opacity: 1; }
+
+  .screenshot-overlay a {
+    color: var(--white);
+    font-size: 12px;
+    font-weight: 600;
+    text-decoration: none;
+    background: rgba(0,161,224,0.9);
+    padding: 6px 14px;
+    border-radius: var(--radius-sm);
+  }
+
+  .screenshot-body { padding: 20px 22px; }
+
+  .screenshot-body h3 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--navy);
+    margin-bottom: 6px;
+  }
+
+  .screenshot-body p { font-size: 13.5px; color: var(--muted); line-height: 1.55; }
+
+  .screenshot-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 12px; }
+
+  .tag {
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--navy-mid);
+    background: rgba(3,45,96,0.07);
+    padding: 3px 10px;
+    border-radius: 999px;
+  }
+
+  /* ─── SKILLS ─── */
+  .skills-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 20px;
+  }
+
+  .skill-card {
+    background: var(--white);
+    border-radius: var(--radius);
+    padding: 24px;
+    box-shadow: var(--card-shadow);
+    border: 1px solid var(--border);
+  }
+
+  .skill-card h3 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--navy);
+    margin-bottom: 14px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid var(--cyan);
+    display: inline-block;
+  }
+
+  .skill-card ul { list-style: none; display: flex; flex-direction: column; gap: 6px; }
+
+  .skill-card li {
+    font-size: 13px;
+    color: var(--text);
+    padding-left: 14px;
+    position: relative;
+  }
+
+  .skill-card li::before {
+    content: '▸';
+    position: absolute;
+    left: 0;
+    color: var(--cyan);
+    font-size: 10px;
+    top: 2px;
+  }
+
+  /* ─── EXPERIENCE ─── */
+  .exp-list { display: flex; flex-direction: column; gap: 0; }
+
+  .exp-item {
+    display: grid;
+    grid-template-columns: 140px 1fr;
+    gap: 24px;
+    padding: 24px 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .exp-item:last-child { border-bottom: none; }
+
+  .exp-date { font-size: 12px; font-weight: 500; color: var(--muted); padding-top: 3px; line-height: 1.4; }
+  .exp-role { font-size: 15px; font-weight: 600; color: var(--navy); margin-bottom: 2px; }
+  .exp-company { font-size: 13px; color: var(--muted); margin-bottom: 8px; }
+  .exp-note { font-size: 12.5px; color: var(--text); line-height: 1.55; }
+
+  /* ─── CONTACT / FOOTER ─── */
+  .contact-strip { background: var(--navy); padding: 56px 24px; }
+
+  .contact-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    gap: 32px;
+  }
+
+  .contact-inner h2 { color: var(--white); margin-bottom: 8px; }
+  .contact-inner p { color: rgba(255,255,255,0.55); font-size: 14px; }
+
+  .contact-links { display: flex; flex-direction: column; gap: 10px; align-items: flex-end; }
+
+  .contact-link {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    color: rgba(255,255,255,0.75);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .contact-link:hover { color: var(--cyan); }
+
+  footer {
+    background: #021D40;
+    text-align: center;
+    padding: 20px;
+    font-size: 12px;
+    color: rgba(255,255,255,0.30);
+  }
+
+  .divider { height: 1px; background: var(--border); margin: 0; }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 860px) {
+    .hero-inner { grid-template-columns: 1fr; }
+    .headshot-wrap { display: none; }
+    .skills-layout { grid-template-columns: 1fr 1fr; }
+    .contact-inner { grid-template-columns: 1fr; }
+    .contact-links { align-items: flex-start; }
+    .exp-item { grid-template-columns: 1fr; gap: 4px; }
+  }
+
+  @media (max-width: 560px) {
+    .skills-layout { grid-template-columns: 1fr; }
+  }
+
+ .video-section {
+  margin-bottom: 40px;
+}
+
+.video-container {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  padding-top: 56.25%;
+  border-radius: 14px;
+  box-shadow: var(--card-shadow);
+}
+
+.video-container iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+</style>
+</head>
+<body>
+
+<!-- ═══ HERO ═══ -->
+<header class="hero">
+  <div class="hero-inner">
+    <div>
+      <div class="hero-eyebrow">Salesforce Platform Governance</div>
+      <h1>Eric <span>Price</span></h1>
+      <p class="hero-sub">Salesforce Administrator · Service Cloud Consultant · Platform App Builder — building tools that give teams real visibility into their org health.</p>
+      <div class="cert-pills">
+        <span class="pill">✦ Certified Administrator</span>
+        <span class="pill">✦ Service Cloud Consultant</span>
+        <span class="pill">✦ Platform App Builder</span>
+        <span class="pill">Advanced Admin — In Progress</span>
+      </div>
+      <div class="hero-ctas">
+        <a href="#project" class="btn btn-primary">View Project ↓</a>
+        <a href="Eric_Price_Resume_2026_v4.docx" class="btn btn-outline">Download Resume</a>
+      </div>
+    </div>
+
+    <!-- Headshot -->
+    <div class="headshot-wrap">
+      <div class="headshot-ring">
+        <img src="Salesforce Head Shot.jpg" alt="Eric Price — Salesforce Trailblazer">
+      </div>
+      <div class="headshot-badge">Trailblazer ☁</div>
+    </div>
+  </div>
+</header>
+
+<!-- ═══ VALUE STRIP ═══ -->
+<div class="value-strip">
+  <div class="container">
+    <div class="value-grid">
+      <div class="value-card">
+        <div class="value-icon">📊</div>
+        <h3>Visibility</h3>
+        <p>Surfaces technical debt by type, severity, risk score, and ownership — all in one place.</p>
+      </div>
+      <div class="value-card">
+        <div class="value-icon">🎯</div>
+        <h3>Prioritization</h3>
+        <p>Formula-based risk scoring bubbles the highest-impact items to the top automatically.</p>
+      </div>
+      <div class="value-card">
+        <div class="value-icon">🔄</div>
+        <h3>Governance</h3>
+        <p>Repeatable process for documenting risks, remediation steps, status, and admin ownership.</p>
+      </div>
+      <div class="value-card">
+        <div class="value-icon">⚙️</div>
+        <h3>Automation</h3>
+        <p>Screen Flows replace manual tracking and standardize how debt findings are captured and assigned.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ PROJECT SCREENSHOTS ═══ -->
+<section class="section" id="project">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-label">Portfolio Project</span>
+      <h2>Technical Debt Tracker</h2>
+     
+    </div>
+    <p style="color:var(--muted);margin-bottom:36px;max-width:640px;font-size:14.5px;">Built entirely in a Developer Edition org (NexGen Living). Custom objects, formula-based risk scoring, Screen Flows, Lightning App Builder, and reports &amp; dashboards — end to end.</p>
+
+  <div class="video-section">
+  <h3>🎥 Live Demo</h3>
+
+  <div class="video-container">
+    <iframe
+        src="https://www.loom.com/embed/f1ef8ae8c8da4b9d98b0285420244856"
+        frameborder="0"
+        webkitallowfullscreen
+        mozallowfullscreen
+        allowfullscreen>
+    </iframe>
+  </div>
+</div>
+    <div class="screenshots-grid">
+
+      <div class="screenshot-card">
+        <div class="screenshot-img-wrap">
+          <img src="Technical Debt Reports folder.png" alt="Reports Folder" loading="lazy">
+          <div class="screenshot-overlay">
+            <a href="Technical Debt Reports folder.png" target="_blank">↗ Full size</a>
+          </div>
+        </div>
+        <div class="screenshot-body">
+          <h3>Reports Folder</h3>
+          <p>Organized public report folder with five targeted reports covering type, severity, new items, fixed items, and critical open issues.</p>
+          <div class="screenshot-tags">
+            <span class="tag">Reports</span>
+            <span class="tag">Folders</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="screenshot-card">
+        <div class="screenshot-img-wrap">
+          <img src="Technical Debt Dashboard.png" alt="Technical Debt Dashboard" loading="lazy">
+          <div class="screenshot-overlay">
+            <a href="Technical Debt Dashboard.png" target="_blank">↗ Full size</a>
+          </div>
+        </div>
+        <div class="screenshot-body">
+          <h3>Technical Debt Dashboard</h3>
+          <p>Multi-component dashboard showing risk by type and severity, fixed items this month, critical open items, and a live debt register.</p>
+          <div class="screenshot-tags">
+            <span class="tag">Dashboards</span>
+            <span class="tag">Charts</span>
+            <span class="tag">Report Tables</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="screenshot-card">
+        <div class="screenshot-img-wrap">
+          <img src="Technical Debt Lighting App.png" alt="Technical Debt Command Center" loading="lazy">
+          <div class="screenshot-overlay">
+            <a href="Technical Debt Lighting App.png" target="_blank">↗ Full size</a>
+          </div>
+        </div>
+        <div class="screenshot-body">
+          <h3>Command Center Lightning App</h3>
+          <p>Lightning App Builder page combining live dashboard charts, a "Highest Risk Items" list component, drill-through navigation, and an embedded Screen Flow for creating new technical debt records in a single admin workspace.</p>
+          <div class="screenshot-tags">
+            <span class="tag">Lightning App Builder</span>
+            <span class="tag">List View</span>
+            <span class="tag">Dashboard Components</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="screenshot-card">
+        <div class="screenshot-img-wrap">
+          <img src="Technical Debt Item detail page.png" alt="Technical Debt Item Detail Page" loading="lazy">
+          <div class="screenshot-overlay">
+            <a href="Technical Debt Item detail page.png" target="_blank">↗ Full size</a>
+          </div>
+        </div>
+        <div class="screenshot-body">
+          <h3>Item Detail Page</h3>
+          <p>Custom object record with Age Score, Severity Score, Business Impact Score, and Final Risk Score formula fields — plus assigned admin, recommended fix, and status tracking.</p>
+          <div class="screenshot-tags">
+            <span class="tag">Custom Objects</span>
+            <span class="tag">Formula Fields</span>
+            <span class="tag">Page Layout</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="screenshot-card">
+        <div class="screenshot-img-wrap">
+          <img src="Highest Risk Items list view.png" alt="Highest Risk Items List View" loading="lazy">
+          <div class="screenshot-overlay">
+            <a href="Highest Risk Items list view.png" target="_blank">↗ Full size</a>
+          </div>
+        </div>
+        <div class="screenshot-body">
+          <h3>Highest Risk Items List View</h3>
+          <p>Filtered list view sorted by Risk Score descending, showing only Active Issues — TDI-0014 scores 100 (Critical), making triage instant.</p>
+          <div class="screenshot-tags">
+            <span class="tag">List Views</span>
+            <span class="tag">Filters</span>
+            <span class="tag">Risk Scoring</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+<!-- ═══════════════════════════════════════════════════════
+     PASTE THIS BLOCK into index.html
+     Recommended placement: right after the screenshots
+     section closing </section> tag, before the first
+     <div class="divider"></div>
+     ═══════════════════════════════════════════════════════ -->
+
+<!-- inline styles scoped to this section only -->
+<style>
+  .apex-section {
+    background: var(--slate);
+    padding: 64px 0;
+  }
+
+  .apex-section .section-label {
+    background: rgba(0,161,224,0.15);
+    border-color: rgba(0,161,224,0.35);
+    color: var(--cyan-light);
+  }
+
+  .apex-section h2 { color: var(--white); }
+
+  .apex-section .intro-text {
+    color: rgba(255,255,255,0.65);
+    font-size: 15px;
+    max-width: 680px;
+    line-height: 1.7;
+    margin-bottom: 40px;
+  }
+
+  /* ── two-column layout ── */
+  .apex-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 28px;
+    margin-bottom: 36px;
+  }
+
+  /* ── screenshots ── */
+  .apex-screenshot-card {
+    border-radius: var(--radius);
+    overflow: hidden;
+    border: 1px solid rgba(255,255,255,0.10);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.35);
+    transition: transform 0.25s, box-shadow 0.25s;
+    background: #0d1b2a;
+  }
+
+  .apex-screenshot-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 16px 48px rgba(0,0,0,0.50);
+  }
+
+  .apex-screenshot-card .img-wrap {
+    position: relative;
+    overflow: hidden;
+    aspect-ratio: 16 / 10;
+  }
+
+  .apex-screenshot-card .img-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top;
+    display: block;
+    transition: transform 0.4s ease;
+  }
+
+  .apex-screenshot-card:hover .img-wrap img { transform: scale(1.03); }
+
+  .apex-screenshot-card .img-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(3,45,96,0.60) 0%, transparent 55%);
+    opacity: 0;
+    transition: opacity 0.3s;
+    display: flex;
+    align-items: flex-end;
+    padding: 14px;
+  }
+
+  .apex-screenshot-card:hover .img-overlay { opacity: 1; }
+
+  .apex-screenshot-card .img-overlay a {
+    color: var(--white);
+    font-size: 12px;
+    font-weight: 600;
+    text-decoration: none;
+    background: rgba(0,161,224,0.90);
+    padding: 6px 14px;
+    border-radius: var(--radius-sm);
+  }
+
+  .apex-screenshot-card .card-label {
+    padding: 14px 18px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .apex-screenshot-card .card-label-icon {
+    width: 28px; height: 28px;
+    border-radius: 6px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 14px;
+    flex-shrink: 0;
+  }
+
+  .apex-screenshot-card .card-label-text {
+    font-size: 13px;
+    font-weight: 600;
+    color: rgba(255,255,255,0.90);
+  }
+
+  .apex-screenshot-card .card-label-sub {
+    font-size: 11.5px;
+    color: rgba(255,255,255,0.45);
+    margin-top: 1px;
+  }
+
+  /* ── meta cards row ── */
+  .apex-meta-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+    margin-bottom: 28px;
+  }
+
+  .apex-meta-card {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.09);
+    border-radius: var(--radius-sm);
+    padding: 18px 20px;
+  }
+
+  .apex-meta-card .meta-label {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.10em;
+    text-transform: uppercase;
+    color: var(--cyan);
+    margin-bottom: 10px;
+  }
+
+  .apex-meta-card ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  .apex-meta-card li {
+    font-size: 12.5px;
+    color: rgba(255,255,255,0.75);
+    padding-left: 14px;
+    position: relative;
+    line-height: 1.4;
+  }
+
+  .apex-meta-card li::before {
+    content: '▸';
+    position: absolute;
+    left: 0;
+    color: var(--cyan);
+    font-size: 9px;
+    top: 3px;
+  }
+
+  /* ── result banner ── */
+  .apex-result {
+    background: rgba(45,187,111,0.10);
+    border: 1px solid rgba(45,187,111,0.25);
+    border-radius: var(--radius-sm);
+    padding: 16px 20px;
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+  }
+
+  .apex-result-icon {
+    font-size: 20px;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  .apex-result-text {
+    font-size: 13.5px;
+    color: rgba(255,255,255,0.80);
+    line-height: 1.6;
+  }
+
+  .apex-result-text strong {
+    color: #2DBB6F;
+    font-weight: 600;
+  }
+
+  @media (max-width: 720px) {
+    .apex-layout { grid-template-columns: 1fr; }
+  }
+</style>
+
+<div class="divider"></div>
+
+<section class="apex-section">
+  <div class="container">
+
+    <div class="section-header">
+      <span class="section-label">Apex Development</span>
+      <h2>Duplicate Prevention Framework</h2>
+    </div>
+
+    <p class="apex-section intro-text">
+      To improve data quality and platform governance, I implemented a custom Apex validation
+      framework that prevents duplicate Technical Debt Item records from being created. The solution
+      uses a custom Apex class and before-insert trigger to evaluate incoming records against existing
+      open items — stopping duplicates at the transaction level with a clear user-facing error message.
+    </p>
+
+    <!-- Screenshots -->
+    <div class="apex-layout">
+
+      <div class="apex-screenshot-card">
+        <div class="img-wrap">
+          <img src="apex-vscode.png" alt="TechDebtDuplicateChecker Apex class in VS Code" loading="lazy">
+          <div class="img-overlay">
+            <a href="apex-vscode.png" target="_blank">↗ Full size</a>
+          </div>
+        </div>
+        <div class="card-label">
+          <div class="card-label-icon" style="background:rgba(0,161,224,0.15);">💻</div>
+          <div>
+            <div class="card-label-text">TechDebtDuplicateChecker.cls</div>
+            <div class="card-label-sub">Apex class · deployed via Salesforce CLI from VS Code</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="apex-screenshot-card">
+        <div class="img-wrap">
+          <img src="apex-duplicate-error.png" alt="Duplicate error message shown to user in Salesforce" loading="lazy">
+          <div class="img-overlay">
+            <a href="apex-duplicate-error.png" target="_blank">↗ Full size</a>
+          </div>
+        </div>
+        <div class="card-label">
+          <div class="card-label-icon" style="background:rgba(224,52,43,0.15);">🚫</div>
+          <div>
+            <div class="card-label-text">Live Duplicate Error</div>
+            <div class="card-label-sub">User-friendly validation message on record save</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Business Value + Technical Components -->
+    <div class="apex-meta-row">
+      <div class="apex-meta-card">
+        <div class="meta-label">Business Value</div>
+        <ul>
+          <li>Prevents duplicate tracking efforts across teams</li>
+          <li>Improves reporting accuracy and dashboard metrics</li>
+          <li>Reduces admin overhead from duplicate records</li>
+          <li>Demonstrates scalable platform governance</li>
+        </ul>
+      </div>
+      <div class="apex-meta-card">
+        <div class="meta-label">Technical Components</div>
+        <ul>
+          <li>Apex Class — TechDebtDuplicateChecker</li>
+          <li>Apex Trigger — TechDebtTrigger (before insert)</li>
+          <li>Bulk-safe duplicate detection logic</li>
+          <li>Automated Apex test coverage</li>
+          <li>Deployed via Salesforce CLI + VS Code</li>
+        </ul>
+      </div>
+      <div class="apex-meta-card">
+        <div class="meta-label">How It Works</div>
+        <ul>
+          <li>Collects Debt Types from incoming records</li>
+          <li>Queries existing open items matching those types</li>
+          <li>Builds a Component Name + Debt Type key set</li>
+          <li>Calls addError() on any matching new record</li>
+          <li>Stops the transaction before insert</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Result banner -->
+    <div class="apex-result">
+      <div class="apex-result-icon">✅</div>
+      <div class="apex-result-text">
+        <strong>Result:</strong> Users receive immediate feedback when attempting to create duplicate
+        technical debt records, ensuring a single source of truth for platform improvement initiatives
+        — without requiring any manual review process.
+      </div>
+    </div>
+
+  </div>
+</section>
+<!-- ═══ END APEX SECTION ═══ -->
+<div class="divider"></div>
+
+<!-- ═══ NEXGEN LIVING ═══ -->
+<style>
+  .nexgen-section { background: var(--navy); padding: 72px 0; }
+
+  .nexgen-section h2 { color: var(--white); }
+
+  .nexgen-intro {
+    color: rgba(255,255,255,0.65);
+    font-size: 15px;
+    max-width: 700px;
+    line-height: 1.75;
+    margin-bottom: 44px;
+  }
+
+  /* ── cloud badges ── */
+  .cloud-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 44px;
+  }
+
+  .cloud-badge {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.14);
+    color: rgba(255,255,255,0.85);
+    font-size: 12px;
+    font-weight: 600;
+    padding: 6px 14px;
+    border-radius: 999px;
+    letter-spacing: 0.02em;
+  }
+
+  .cloud-badge .cb-dot {
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  /* ── two-col layout ── */
+  .nexgen-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 28px;
+    margin-bottom: 32px;
+  }
+
+  /* ── PDF preview card ── */
+  .nexgen-pdf-card {
+    border-radius: var(--radius);
+    overflow: hidden;
+    border: 1px solid rgba(255,255,255,0.12);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.40);
+    background: #0d1b2a;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.25s, box-shadow 0.25s;
+  }
+
+  .nexgen-pdf-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 16px 48px rgba(0,0,0,0.55);
+  }
+
+  .pdf-preview-wrap {
+    position: relative;
+    flex: 1;
+    overflow: hidden;
+    min-height: 260px;
+    background: linear-gradient(135deg, #0d2137 0%, #091929 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* decorative page stack visual */
+  .pdf-mock {
+    position: relative;
+    width: 160px;
+    height: 200px;
+  }
+
+  .pdf-mock-page {
+    position: absolute;
+    border-radius: 6px;
+    border: 1px solid rgba(255,255,255,0.10);
+  }
+
+  .pdf-mock-page:nth-child(1) {
+    width: 140px; height: 180px;
+    background: #132940;
+    top: 20px; left: 20px;
+    transform: rotate(4deg);
+  }
+
+  .pdf-mock-page:nth-child(2) {
+    width: 140px; height: 180px;
+    background: #1a3550;
+    top: 10px; left: 10px;
+    transform: rotate(2deg);
+  }
+
+  .pdf-mock-page:nth-child(3) {
+    width: 140px; height: 180px;
+    background: #1f3d5c;
+    top: 0; left: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 18px 14px;
+    gap: 8px;
+  }
+
+  .pdf-mock-line {
+    height: 6px;
+    border-radius: 3px;
+    background: rgba(0,161,224,0.35);
+  }
+
+  .pdf-mock-line.accent { background: rgba(0,161,224,0.70); width: 60%; }
+  .pdf-mock-line.w90 { width: 90%; }
+  .pdf-mock-line.w75 { width: 75%; }
+  .pdf-mock-line.w85 { width: 85%; }
+  .pdf-mock-line.w50 { width: 50%; }
+
+  .pdf-title-overlay {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    padding: 20px;
+    background: linear-gradient(to top, rgba(3,45,96,0.85) 0%, transparent 100%);
+  }
+
+  .pdf-title-overlay span {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--cyan-light);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+
+  .pdf-card-footer {
+    padding: 16px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-top: 1px solid rgba(255,255,255,0.08);
+  }
+
+  .pdf-card-footer-label {
+    font-size: 13px;
+    font-weight: 600;
+    color: rgba(255,255,255,0.80);
+  }
+
+  .pdf-card-footer-sub {
+    font-size: 11px;
+    color: rgba(255,255,255,0.40);
+    margin-top: 2px;
+  }
+
+  .pdf-dl-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    background: var(--cyan);
+    color: var(--navy);
+    font-size: 12px;
+    font-weight: 700;
+    padding: 8px 16px;
+    border-radius: var(--radius-sm);
+    text-decoration: none;
+    transition: background 0.2s, transform 0.2s;
+    white-space: nowrap;
+  }
+
+  .pdf-dl-btn:hover { background: var(--cyan-light); transform: translateY(-1px); }
+
+  /* ── patterns grid ── */
+  .patterns-col {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .pattern-card {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.09);
+    border-radius: var(--radius-sm);
+    padding: 16px 18px;
+    transition: background 0.2s;
+  }
+
+  .pattern-card:hover { background: rgba(255,255,255,0.08); }
+
+  .pattern-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 6px;
+  }
+
+  .pattern-num {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.10em;
+    color: var(--cyan);
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+
+  .pattern-cloud-tag {
+    font-size: 10px;
+    font-weight: 600;
+    color: rgba(255,255,255,0.40);
+    background: rgba(255,255,255,0.06);
+    padding: 2px 8px;
+    border-radius: 999px;
+    white-space: nowrap;
+  }
+
+  .pattern-card h4 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 13.5px;
+    font-weight: 600;
+    color: rgba(255,255,255,0.90);
+    margin-bottom: 4px;
+  }
+
+  .pattern-card p {
+    font-size: 12px;
+    color: rgba(255,255,255,0.50);
+    line-height: 1.55;
+  }
+
+  /* ── data model strip ── */
+  .data-model-strip {
+    background: rgba(0,0,0,0.20);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: var(--radius);
+    padding: 24px 28px;
+    margin-bottom: 28px;
+  }
+
+  .data-model-strip h4 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--cyan);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 14px;
+  }
+
+  .object-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .object-pill {
+    font-family: 'Courier New', monospace;
+    font-size: 11.5px;
+    color: rgba(255,255,255,0.75);
+    background: rgba(0,161,224,0.10);
+    border: 1px solid rgba(0,161,224,0.20);
+    padding: 4px 11px;
+    border-radius: var(--radius-sm);
+  }
+
+  /* ── interview quote ── */
+  .interview-quote {
+    background: rgba(0,161,224,0.07);
+    border-left: 3px solid var(--cyan);
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    padding: 20px 24px;
+  }
+
+  .interview-quote-label {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--cyan);
+    margin-bottom: 10px;
+  }
+
+  .interview-quote p {
+    font-size: 13.5px;
+    color: rgba(255,255,255,0.70);
+    line-height: 1.70;
+    font-style: italic;
+  }
+
+  @media (max-width: 760px) {
+    .nexgen-layout { grid-template-columns: 1fr; }
+  }
+</style>
+
+<section class="nexgen-section" id="nexgen">
+  <div class="container">
+
+    <div class="section-header">
+      <span class="section-label" style="background:rgba(0,161,224,0.15);border-color:rgba(0,161,224,0.35);color:var(--cyan-light);">Architecture Design</span>
+      <h2>NexGen Living — Multi-Cloud Salesforce Architecture</h2>
+    </div>
+
+    <p class="nexgen-intro">
+      NexGen Living is a PropTech startup concept I designed a complete Salesforce architecture for from scratch — 
+      a two-sided intergenerational housing marketplace that pairs senior homeowners with a spare room with young 
+      professionals or students who need affordable housing. The architecture spans seven Salesforce clouds, ten 
+      custom objects, a declarative matchmaking engine, and cross-cloud revenue enforcement — all built and 
+      documented in a single Developer Edition org with no code beyond one Apex duplicate-prevention class.
+    </p>
+
+    <!-- Cloud badges -->
+    <div class="cloud-row">
+      <span class="cloud-badge"><span class="cb-dot" style="background:#00A1E0"></span>Sales Cloud</span>
+      <span class="cloud-badge"><span class="cb-dot" style="background:#E0342B"></span>Service Cloud</span>
+      <span class="cloud-badge"><span class="cb-dot" style="background:#2DBB6F"></span>Experience Cloud</span>
+      <span class="cloud-badge"><span class="cb-dot" style="background:#F59A23"></span>Revenue Cloud</span>
+      <span class="cloud-badge"><span class="cb-dot" style="background:#9B59B6"></span>Marketing Cloud</span>
+      <span class="cloud-badge"><span class="cb-dot" style="background:#41C5E8"></span>Field Service</span>
+      <span class="cloud-badge"><span class="cb-dot" style="background:#FFD700"></span>Agentforce</span>
+    </div>
+
+    <div class="nexgen-layout">
+
+      <!-- PDF download card -->
+      <div class="nexgen-pdf-card">
+        <div class="pdf-preview-wrap">
+          <div class="pdf-mock">
+            <div class="pdf-mock-page"></div>
+            <div class="pdf-mock-page"></div>
+            <div class="pdf-mock-page">
+              <div class="pdf-mock-line accent"></div>
+              <div class="pdf-mock-line w90"></div>
+              <div class="pdf-mock-line w75"></div>
+              <div class="pdf-mock-line w85"></div>
+              <div class="pdf-mock-line w50"></div>
+              <div class="pdf-mock-line w90"></div>
+              <div class="pdf-mock-line w75"></div>
+              <div class="pdf-mock-line w85"></div>
+            </div>
+          </div>
+          <div class="pdf-title-overlay">
+            <span>Complete Reference · 24 pages</span>
+          </div>
+        </div>
+        <div class="pdf-card-footer">
+          <div>
+            <div class="pdf-card-footer-label">NexGen Living — Complete Reference</div>
+            <div class="pdf-card-footer-sub">Flows · Data Model · Architecture · Dev Setup · Interview Prep</div>
+          </div>
+          <a href="NexGen_Living_Complete_Reference.pdf" download class="pdf-dl-btn">↓ PDF</a>
+        </div>
+      </div>
+
+      <!-- Architecture patterns -->
+      <div class="patterns-col">
+        <div class="pattern-card">
+          <div class="pattern-header">
+            <span class="pattern-num">Pattern 01</span>
+            <span class="pattern-cloud-tag">Sales Cloud</span>
+          </div>
+          <h4>Scheduled Flow as Matchmaking Engine</h4>
+          <p>Queries both renter and senior pools nightly, scores compatibility across 8 criteria using formula fields, auto-creates ranked Match_Proposal__c records — no Apex.</p>
+        </div>
+        <div class="pattern-card">
+          <div class="pattern-header">
+            <span class="pattern-num">Pattern 02</span>
+            <span class="pattern-cloud-tag">Service Cloud</span>
+          </div>
+          <h4>Platform Event as IoT Bridge</h4>
+          <p>Smart home sensors publish Platform Events. A Platform Event-Triggered Flow converts the payload into a Priority Critical Case in real time — rare on resumes.</p>
+        </div>
+        <div class="pattern-card">
+          <div class="pattern-header">
+            <span class="pattern-num">Pattern 03</span>
+            <span class="pattern-cloud-tag">Revenue Cloud</span>
+          </div>
+          <h4>Contractual SLA → Automatic Invoice Credit</h4>
+          <p>An SLA breach flips a checkbox. A Record-Triggered Flow calculates the penalty, creates a Credit_Memo__c, and injects a negative line item into the next open invoice. Cross-cloud, declarative.</p>
+        </div>
+        <div class="pattern-card">
+          <div class="pattern-header">
+            <span class="pattern-num">Pattern 04</span>
+            <span class="pattern-cloud-tag">Experience Cloud</span>
+          </div>
+          <h4>Three Portals, One Org, Zero Code</h4>
+          <p>Haven (seniors), Base (renters), and Partner Hub (universities/brokers) — all from one org using profiles, permission sets, and sharing rules. No code deployment differences.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Data model strip -->
+    <div class="data-model-strip">
+      <h4>Custom Objects — Data Model Spine</h4>
+      <div class="object-pills">
+        <span class="object-pill">Match__c</span>
+        <span class="object-pill">Housing_Unit__c</span>
+        <span class="object-pill">Companion_Hours__c</span>
+        <span class="object-pill">Monthly_Hours_Report__c</span>
+        <span class="object-pill">Invoice__c</span>
+        <span class="object-pill">Credit_Memo__c</span>
+        <span class="object-pill">Match_Proposal__c</span>
+        <span class="object-pill">Wellbeing_Check__c</span>
+        <span class="object-pill">Commission__c</span>
+        <span class="object-pill">Contact (extended)</span>
+      </div>
+    </div>
+
+    <!-- Interview opening story quote -->
+    <div class="interview-quote">
+      <div class="interview-quote-label">Architecture Summary</div>
+      <p>"NexGen Living is a two-sided marketplace, which means I had to build two completely different 
+      acquisition funnels, two distinct Experience Cloud portals, two separate Marketing Cloud journeys — 
+      and then have them converge at a matching engine. The matching engine is a Scheduled Flow that queries 
+      both pools, scores compatibility across eight criteria, and auto-creates ranked match proposals. No Apex. 
+      The piece I'm most proud of is the contractual enforcement chain: when a Service Cloud SLA is breached, 
+      a Record-Triggered Flow automatically calculates the financial penalty, creates a Credit Memo, and injects 
+      a negative line item into the next invoice through Revenue Cloud. The renter's contract enforces itself — 
+      that kind of cross-cloud data flow, done entirely declaratively, is what separates a Salesforce architect 
+      from someone who just builds flows."</p>
+    </div>
+
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══ SKILLS ═══ -->
+<section class="section" style="padding-top:48px;">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-label">Credentials</span>
+      <h2>Skills &amp; Experience</h2>
+    </div>
+    <div class="skills-layout">
+      <div class="skill-card">
+        <h3>Salesforce Platform</h3>
+        <ul>
+          <li>Sales Cloud · Service Cloud · NPSP</li>
+          <li>Experience Cloud · Marketing Cloud</li>
+          <li>CPQ (Conga &amp; Salesforce)</li>
+          <li>Revenue Cloud · Einstein · Pardot</li>
+          <li>Agentforce · Omni-Channel</li>
+        </ul>
+      </div>
+      <div class="skill-card">
+        <h3>Automation &amp; Dev</h3>
+        <ul>
+          <li>Flow Builder (Screen, Record, Scheduled)</li>
+          <li>Lightning App Builder</li>
+          <li>Apex · Visualforce</li>
+          <li>Salesforce CLI · VS Code · Git/GitHub</li>
+          <li>Process Builder (migration)</li>
+        </ul>
+      </div>
+      <div class="skill-card">
+        <h3>Integrations &amp; Tools</h3>
+        <ul>
+          <li>DocuSign · HubSpot · RingCentral</li>
+          <li>Gearset · Demand Tools</li>
+          <li>Jira · Confluence · Asana</li>
+          <li>Workday · ZenDesk</li>
+          <li>HTML · CSS · JavaScript · React</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Experience -->
+    <div style="margin-top:52px;">
+      <div class="section-header">
+        <span class="section-label">Work History</span>
+        <h2>Recent Experience</h2>
+      </div>
+      <div class="exp-list" style="background:var(--white);border-radius:var(--radius);border:1px solid var(--border);box-shadow:var(--card-shadow);padding:0 24px;">
+        <div class="exp-item">
+          <div class="exp-date">Aug 2025 – Feb 2026</div>
+          <div>
+            <div class="exp-role">Systems Support Engineer</div>
+            <div class="exp-company">Gloo · Boulder, CO (Remote)</div>
+            <div class="exp-note">Administered three Salesforce instances (Sales Cloud, Service Cloud, NPSP, Account Engagement). Primary technical point of contact across cross-functional teams. Role eliminated in post-merger restructuring.</div>
+          </div>
+        </div>
+        <div class="exp-item">
+          <div class="exp-date">Jan 2023 – Jan 2024</div>
+          <div>
+            <div class="exp-role">Salesforce Administrator</div>
+            <div class="exp-company">Traliant · Manhattan Beach, CA (Remote)</div>
+            <div class="exp-note">Reduced case-handling time 25% with a Screen Flow "Send to Sales" button. Cut lead duplicate rate via deduplication Flow. Served 6 Sales Ops leaders and 28 reps at 50 cases/month.</div>
+          </div>
+        </div>
+        <div class="exp-item">
+          <div class="exp-date">Nov 2021 – Oct 2022</div>
+          <div>
+            <div class="exp-role">Salesforce Administrator</div>
+            <div class="exp-company">Young Audiences · Philadelphia, PA (Remote)</div>
+            <div class="exp-note">Rebuilt Classic artist-booking app as a Screen Flow for Lightning. Designed Lead and Opportunity management Flows; delivered staff training.</div>
+          </div>
+        </div>
+        <div class="exp-item">
+          <div class="exp-date">May – Sep 2021</div>
+          <div>
+            <div class="exp-role">Salesforce Administrator (Contract)</div>
+            <div class="exp-company">CSU Global · Denver, CO (Remote)</div>
+            <div class="exp-note">Cut support case volume 40% with a Flow + API integration syncing a student document portal into Salesforce account records.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ CONTACT ═══ -->
+<div class="contact-strip">
+  <div class="contact-inner">
+    <div>
+      <h2>Let's Talk</h2>
+      <p>Available for Salesforce Administrator, Consultant, or Platform Engineer roles.</p>
+      <div style="margin-top:20px;">
+        <a href="Eric_Price_Resume_2026_v4.docx" class="btn btn-primary">Download Resume</a>
+      </div>
+    </div>
+    <div class="contact-links">
+      <a href="mailto:ericzprice@gmail.com" class="contact-link">✉ ericzprice@gmail.com</a>
+      <a href="https://github.com/ericzprice" class="contact-link" target="_blank">⌥ github.com/ericzprice</a>
+      <a href="https://trailblazer.me/id/eprice39" class="contact-link" target="_blank">☁ trailblazer.me/id/eprice39</a>
+      <span class="contact-link" style="cursor:default">📍 Boulder, CO</span>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <p>Eric Price · Salesforce Portfolio · Technical Debt Tracker · NexGen Living Developer Org</p>
+</footer>
+
+</body>
+</html>
