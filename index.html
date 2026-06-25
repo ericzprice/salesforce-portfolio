@@ -668,6 +668,111 @@
     </div>
   </div>
 </section>
+ <div class="divider"></div>
+
+<!-- ═══ APEX: AUTO-ESCALATION SCHEDULER ═══ -->
+<section class="apex-section" id="escalation">
+  <div class="container">
+
+    <div class="section-header">
+      <span class="section-label">Apex Development</span>
+      <h2>Scheduled Apex: Auto-Escalation Engine</h2>
+    </div>
+
+    <p class="apex-section intro-text">
+      To mirror what a real governance team does in a weekly review meeting — but automatically — I built a
+      <code style="font-family:monospace;font-size:13px;background:rgba(255,255,255,0.08);padding:2px 7px;border-radius:4px;color:var(--cyan-light);">Schedulable</code>
+      Apex class that runs nightly at 2 AM. It queries all Technical Debt Items where the Target Resolution Date
+      has passed and Status is still "New" or "In Progress," then bumps Severity up one level (Low → Medium →
+      High → Critical) and appends a timestamped note to the Description. A single bulk-safe DML call handles
+      any number of records in one transaction.
+    </p>
+
+    <!-- Screenshots -->
+    <div class="apex-layout">
+
+      <div class="apex-screenshot-card">
+        <div class="img-wrap">
+          <img src="apex-scheduler-vscode.png" alt="TechDebtEscalationScheduler Apex class in VS Code with 100% test pass rate" loading="lazy">
+          <div class="img-overlay">
+            <a href="apex-scheduler-vscode.png" target="_blank">↗ Full size</a>
+          </div>
+        </div>
+        <div class="card-label">
+          <div class="card-label-icon" style="background:rgba(0,161,224,0.15);">💻</div>
+          <div>
+            <div class="card-label-text">TechDebtEscalationScheduler.cls</div>
+            <div class="card-label-sub">3/3 tests passing · 100% pass rate · deployed via Salesforce CLI</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="apex-screenshot-card">
+        <div class="img-wrap">
+          <img src="apex-scheduler-jobs.png" alt="Salesforce Setup — Scheduled Jobs showing Nightly Tech Debt Escalation job" loading="lazy">
+          <div class="img-overlay">
+            <a href="apex-scheduler-jobs.png" target="_blank">↗ Full size</a>
+          </div>
+        </div>
+        <div class="card-label">
+          <div class="card-label-icon" style="background:rgba(45,187,111,0.15);">🕑</div>
+          <div>
+            <div class="card-label-text">Setup → Scheduled Jobs</div>
+            <div class="card-label-sub">Nightly Tech Debt Escalation · next run 2:00 AM · submitted by Eric Price</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Meta cards -->
+    <div class="apex-meta-row">
+      <div class="apex-meta-card">
+        <div class="meta-label">Business Value</div>
+        <ul>
+          <li>Replaces manual weekly governance review meetings</li>
+          <li>Escalates overdue items before they become critical blockers</li>
+          <li>Creates an auditable timestamp log on every escalation</li>
+          <li>Runs automatically — zero admin effort after setup</li>
+        </ul>
+      </div>
+      <div class="apex-meta-card">
+        <div class="meta-label">Technical Components</div>
+        <ul>
+          <li>Apex Class — TechDebtEscalationScheduler (Schedulable)</li>
+          <li>Map-based severity escalation logic</li>
+          <li>Bulk-safe SOQL + single DML outside loop</li>
+          <li>LIMIT 200 governor limit guard</li>
+          <li>Full test class with @TestSetup · 3 assertions</li>
+        </ul>
+      </div>
+      <div class="apex-meta-card">
+        <div class="meta-label">How It Works</div>
+        <ul>
+          <li>Queries overdue items (past Target Resolution Date)</li>
+          <li>Filters to Status = New or In Progress only</li>
+          <li>Looks up next severity via escalation map</li>
+          <li>Appends AUTO-ESCALATED timestamp to Description</li>
+          <li>Scheduled via Anonymous Apex cron — 0 0 2 * * ?</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Result banner -->
+    <div class="apex-result">
+      <div class="apex-result-icon">✅</div>
+      <div class="apex-result-text">
+        <strong>Result:</strong> 3/3 tests passing at 100% coverage, job live in Setup → Scheduled Jobs with
+        next fire time confirmed at 2:00 AM. I chose <strong>Schedulable Apex</strong> over a Flow Scheduled Path
+        because the escalation rules depend on conditional multi-step logic — branching by current severity level
+        — which is cleaner in a map-based Apex pattern than chaining Decision elements in Flow.
+      </div>
+    </div>
+
+  </div>
+</section>
+<!-- ═══ END ESCALATION SECTION ═══ -->
+
 <!-- ═══════════════════════════════════════════════════════
      PASTE THIS BLOCK into index.html
      Recommended placement: right after the screenshots
@@ -676,6 +781,8 @@
      ═══════════════════════════════════════════════════════ -->
 
 <!-- inline styles scoped to this section only -->
+ <div class="divider">
+  
 <style>
   .apex-section {
     background: var(--slate);
